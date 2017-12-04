@@ -40,3 +40,28 @@ resource "aws_subnet" "private_subnet" {
     EnvironmentGroup = "${var.environment_group}"
   }
 }
+
+resource "aws_security_group" "bdm_web" {
+  vpc_id = "${var.apps_vpc_id}"
+
+  ingress {
+    from_port   = "${var.https_from_port}"
+    to_port     = "${var.https_to_port}"
+    protocol    = "${var.https_protocol}"
+    cidr_blocks = ["${var.dq_apps_cidr}"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name             = "sg-bdm-web-${var.service}-${var.environment}"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}
