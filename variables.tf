@@ -17,3 +17,13 @@ variable "environment_group" {
   default     = "dq-apps"
   description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
 }
+
+variable "apps_vpc_id" {
+  default     = false
+  description = "Value obtained from Apps module"
+}
+
+variable "dq_BDM_subnet_cidr" {
+  default     = "10.1.10.0/24"
+  description = "DQ BDM subnet CIDR as per IP Addresses and CIDR blocks document"
+}
