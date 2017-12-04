@@ -90,3 +90,36 @@ resource "aws_security_group" "bdm_RDS" {
     EnvironmentGroup = "${var.environment_group}"
   }
 }
+
+
+resource "aws_db_subnet_group" "bdm_RDS_group" {
+  name       = "main group"
+  subnet_ids = ["${aws_subnet.private_subnet.id}"]
+
+  tags {
+    Name             = "dq-bdm-postgresql-${var.service}-${var.environment}-subnet-group"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}
+
+resource "aws_db_instance" "bdm_RDS_server" {
+  allocated_storage      = 10
+  storage_type           = "gp2"
+  engine                 = "postgres"
+  instance_class         = "RDS_.t1.micro"
+  name                   = "${var.RDS_name}"
+  username               = "${var.RDS_username}"
+  password               = "${var.RDS_password}"
+  RDS__subnet_group_name = "${aws_db_subnet_group.bdm_RDS_group.id}"
+  publicly_accessible    = false
+  vpc_security_group_ids = ["${aws_security_group.bdm_RDS.id}"]
+
+  tags {
+    Name             = "ec2-dq-bdm-postgresql-${var.service}-${var.environment}"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}

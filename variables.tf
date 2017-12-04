@@ -63,7 +63,16 @@ variable "dq_apps_cidr" {
   description = "DQ Apps CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable "apps_vpc_id" {
-  default     = false
-  description = "Value obtained from Apps module"
+variable "RDS_name" {
+
 }
+
+variable "RDS_username" {
+
+}
+
+variable "RDS_password" {
+
+}
+
+
