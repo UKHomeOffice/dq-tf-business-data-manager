@@ -65,3 +65,28 @@ resource "aws_security_group" "bdm_web" {
     EnvironmentGroup = "${var.environment_group}"
   }
 }
+
+resource "aws_security_group" "bdm_RDS" {
+  vpc_id = "${var.apps_vpc_id}"
+
+  ingress {
+    from_port   = "${var.RDS_from_port}"
+    to_port     = "${var.RDS_to_port}"
+    protocol    = "${var.RDS_protocol}"
+    cidr_blocks = ["${var.dq_apps_cidr}"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name             = "sg-bdm-web-${var.service}-${var.environment}"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}
