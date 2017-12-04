@@ -49,3 +49,12 @@ class TestE2E(unittest.TestCase):
 
     def test_subnet_cidr(self):
         self.assertEqual(self.result["root_modules"]["aws_subnet.private_subnet"]["cidr_block"], "10.1.10.0/24")
+
+        @unittest.skip
+    def test_web_security_group_ingress(self):
+        self.assertTrue(Runner.finder(self.result["root_modules"]["aws_security_group.sgrp"], ingress, {
+            'from_port': '443',
+            'to_port': '443',
+            'Protocol': 'tcp',
+            'Cidr_blocks': '10.1.0.0/16'
+        }))
