@@ -28,3 +28,15 @@ resource "aws_instance" "instance" {
     EnvironmentGroup = "${var.environment_group}"
   }
 }
+
+resource "aws_subnet" "private_subnet" {
+  vpc_id     = "${var.apps_vpc_id}"
+  cidr_block = "${var.dq_BDM_subnet_cidr}"
+
+  tags {
+    Name             = "sn-dq-bdm-private-${var.service}-${var.environment}-{az}"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}
