@@ -1,8 +1,3 @@
-variable "instance_type" {
-  default     = "t2.nano"
-  description = "EC2 instance type"
-}
-
 variable "service" {
   default     = "dq-bdm"
   description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
