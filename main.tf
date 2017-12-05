@@ -110,9 +110,8 @@ resource "aws_security_group" "bdm_RDS" {
 }
 
 resource "random_string" "password" {
-  length           = 16
-  special          = true
-  override_special = "/@\" "
+  length  = 16
+  special = false
 }
 
 resource "random_string" "username" {
