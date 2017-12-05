@@ -1,4 +1,4 @@
-# pylint: disable=missing-docstring, line-too-long, protected-access
+# pylint: disable=missing-docstring, line-too-long, protected-access, E1101, C0202
 import unittest
 import hashlib
 from runner import Runner
@@ -19,20 +19,27 @@ class TestE2E(unittest.TestCase):
               source = "./mymodule"
               providers = {aws = "aws"}
               
+              RDS_name              = "gp_database"
+              RDS_name              = "gp_database"
+              RDS_username          = "foo"
+              RDS_password          = "bar"
+              
             } 
             
         """
         self.result = Runner(self.snippet).result
 
+    def test_instance_type(self):
+        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["instance_type"], "t2.nano")
 
-    # Instance
-    @unittest.skip  # @TODO
+    def test_instance_ami(self):
+        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["ami"], "ami-221d0346")
+
     def test_instance_user_data(self):
-        greenplum_listen = hashlib.sha224("CHECK_self=127.0.0.1:8080 CHECK_google=google.com:80 CHECK_googletls=google.com:443 LISTEN_HTTP=0.0.0.0:443").sha1()
-        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["user_data"], greenplum_listen)
+        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["user_data"], "956c7ed7bc9f169b3d71473c17fdbd3e7da55db5")
 
     def test_instance_tags_name(self):
-        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Name"], "instance-bdm-{1}-dq-bdm")
+        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Name"], "instance-bdm-{1}-dq-bdm-preprod")
 
     def test_instance_tags_service(self):
         self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Service"], "dq-bdm")
@@ -40,19 +47,19 @@ class TestE2E(unittest.TestCase):
     def test_instance_tags_environment(self):
         self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Environment"], "preprod")
 
-    def test_instance_tags_environmentgroup(self):
+    def test_instance_tags_envgroup(self):
         self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.EnvironmentGroup"], "dq-apps")
 
-    # Subnet
+    @unittest.skip
     def test_subnet_vpc(self):
         self.assertEqual(self.result["root_modules"]["aws_subnet.subnet"]["vpc_id"], "module.apps.appsvpc_id")
 
     def test_subnet_cidr(self):
         self.assertEqual(self.result["root_modules"]["aws_subnet.private_subnet"]["cidr_block"], "10.1.10.0/24")
 
-        @unittest.skip
+    @unittest.skip
     def test_web_security_group_ingress(self):
-        self.assertTrue(Runner.finder(self.result["root_modules"]["aws_security_group.sgrp"], ingress, {
+        self.assertTrue(Runner.finder(self.result["root_modules"]["aws_security_group.sgrp"], "ingress", {
             'from_port': '443',
             'to_port': '443',
             'Protocol': 'tcp',
