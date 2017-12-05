@@ -48,7 +48,14 @@ resource "aws_security_group" "bdm_web" {
     from_port   = "${var.https_from_port}"
     to_port     = "${var.https_to_port}"
     protocol    = "${var.https_protocol}"
-    cidr_blocks = ["${var.dq_apps_cidr}"]
+    cidr_blocks = ["${var.dq_data_pipeline_cidr}", "${var.dq_opps_subnet_1_cidr}"]
+  }
+
+  ingress {
+    from_port   = "${var.ssh_from_port}"
+    to_port     = "${var.ssh_to_port}"
+    protocol    = "${var.ssh_protocol}"
+    cidr_blocks = ["${var.dq_opps_subnet_1_cidr}"]
   }
 
   egress {
@@ -73,7 +80,7 @@ resource "aws_security_group" "bdm_RDS" {
     from_port   = "${var.RDS_from_port}"
     to_port     = "${var.RDS_to_port}"
     protocol    = "${var.RDS_protocol}"
-    cidr_blocks = ["${var.dq_apps_cidr}"]
+    cidr_blocks = ["${var.dq_opps_subnet_1_cidr}", "${var.dq_BDM_subnet_cidr}"]
   }
 
   egress {
@@ -90,7 +97,6 @@ resource "aws_security_group" "bdm_RDS" {
     EnvironmentGroup = "${var.environment_group}"
   }
 }
-
 
 resource "aws_db_subnet_group" "bdm_RDS_group" {
   name       = "main group"
