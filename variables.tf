@@ -63,16 +63,33 @@ variable "dq_apps_cidr" {
   description = "DQ Apps CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable "RDS_name" {
+variable "RDS_name" {}
 
+variable "RDS_username" {}
+
+variable "RDS_password" {}
+
+variable dq_data_pipeline_cidr {
+  default     = "10.1.8.0/24"
+  description = "DQ Data Pipeline CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable "RDS_username" {
-
+variable dq_opps_subnet_1_cidr {
+  default     = "10.2.0.0/24"
+  description = "DQ Ops Subnet 1 CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable "RDS_password" {
-
+variable ssh_from_port {
+  default     = 22
+  description = "From port for SSH traffic"
 }
 
+variable ssh_to_port {
+  default     = 22
+  description = "To port for SSH traffic"
+}
 
+variable ssh_protocol {
+  default     = "tcp"
+  description = "Protocol for SSH traffic"
+}
