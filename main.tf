@@ -41,6 +41,35 @@ resource "aws_subnet" "private_subnet" {
   }
 }
 
+resource "aws_subnet" "private_az2_subnet" {
+  vpc_id            = "${var.apps_vpc_id}"
+  cidr_block        = "${var.dq_BDM_subnet_az2_cidr}"
+  availability_zone = "${var.az2}"
+
+  tags {
+    Name             = "sn-dq-bdm-private-${var.service}-${var.environment}-az2"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}
+
+resource "aws_db_subnet_group" "bdm_db_group" {
+  name = "main group"
+
+  subnet_ids = [
+    "${aws_subnet.private_subnet.id}",
+    "${aws_subnet.private_az2_subnet.id}",
+  ]
+
+  tags {
+    Name             = "dq-bdm-postgresql-${var.service}-${var.environment}-subnet-group"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
+}
+
 resource "aws_security_group" "bdm_web" {
   vpc_id = "${var.apps_vpc_id}"
 

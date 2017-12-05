@@ -93,3 +93,13 @@ variable ssh_protocol {
   default     = "tcp"
   description = "Protocol for SSH traffic"
 }
+
+variable "az2" {
+  default     = "eu-west-2b"
+  description = "Availability zone no2 for RDS implementation"
+}
+
+variable "dq_BDM_subnet_az2_cidr" {
+  default     = "10.1.11.0/24"
+  description = "DQ BDM Subnet in availability zone number 2"
+}
