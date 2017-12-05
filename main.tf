@@ -118,7 +118,7 @@ resource "aws_db_instance" "bdm_RDS_server" {
   name                   = "${var.RDS_name}"
   username               = "${var.RDS_username}"
   password               = "${var.RDS_password}"
-  RDS__subnet_group_name = "${aws_db_subnet_group.bdm_RDS_group.id}"
+  db_subnet_group_name   = "${aws_db_subnet_group.bdm_RDS_group.id}"
   publicly_accessible    = false
   vpc_security_group_ids = ["${aws_security_group.bdm_RDS.id}"]
 

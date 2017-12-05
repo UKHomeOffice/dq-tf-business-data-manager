@@ -4,7 +4,7 @@ variable "instance_type" {
 }
 
 variable "service" {
-  default     = "dq-mdm"
+  default     = "dq-bdm"
   description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
 }
 
