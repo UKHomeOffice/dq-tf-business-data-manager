@@ -58,12 +58,6 @@ variable "dq_apps_cidr" {
   description = "DQ Apps CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable "RDS_name" {}
-
-variable "RDS_username" {}
-
-variable "RDS_password" {}
-
 variable dq_data_pipeline_cidr {
   default     = "10.1.8.0/24"
   description = "DQ Data Pipeline CIDR as per IP Addresses and CIDR blocks document"
