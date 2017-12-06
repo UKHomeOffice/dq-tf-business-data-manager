@@ -18,11 +18,6 @@ class TestE2E(unittest.TestCase):
               source = "./mymodule"
               providers = {aws = "aws"}
               
-              RDS_name              = "gp_database"
-              RDS_name              = "gp_database"
-              RDS_username          = "foo"
-              RDS_password          = "bar"
-              
             } 
             
         """
