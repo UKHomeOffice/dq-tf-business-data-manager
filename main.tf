@@ -1,7 +1,7 @@
 module "instance" {
   source          = "github.com/UKHomeOffice/connectivity-tester-tf"
   subnet_id       = "${aws_subnet.private_subnet.id}"
-  user_data       = "LISTEN_HTTP=0.0.0.0:443"
+  user_data       = "LISTEN_HTTP=0.0.0.0:443 CHECK_RDS=${aws_db_instance.bdm_RDS_server.address}:5432"
   security_groups = ["${aws_security_group.bdm_web.id}"]
 
   //  tags {
