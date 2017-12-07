@@ -42,11 +42,6 @@ resource "aws_route_table_association" "bdm_private_subnet_rt_association" {
   route_table_id = "${var.route_table_id}"
 }
 
-resource "aws_route_table_association" "bdm_private_az2_subnet_rt_association" {
-  subnet_id      = "${aws_subnet.private_az2_subnet.id}"
-  route_table_id = "${var.route_table_id}"
-}
-
 resource "aws_db_subnet_group" "bdm_db_group" {
   name = "main group"
 
