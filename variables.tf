@@ -92,3 +92,8 @@ variable "dq_BDM_subnet_az2_cidr" {
   default     = "10.1.11.0/24"
   description = "DQ BDM Subnet in availability zone number 2"
 }
+
+variable "route_table_id" {
+  default     = false
+  description = "Value obtained from Apps module"
+}
