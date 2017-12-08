@@ -4,12 +4,12 @@ module "instance" {
   user_data       = "LISTEN_HTTP=0.0.0.0:443 CHECK_RDS=${aws_db_instance.bdm_RDS_server.address}:5432"
   security_groups = ["${aws_security_group.bdm_web.id}"]
 
-  //  tags {
-  //    Name             = "instance-bdm-{1}-${var.service}-${var.environment}"
-  //    Service          = "${var.service}"
-  //    Environment      = "${var.environment}"
-  //    EnvironmentGroup = "${var.environment_group}"
-  //  }
+  tags = {
+    Name             = "instance-bdm-{1}-${var.service}-${var.environment}"
+    Service          = "${var.service}"
+    Environment      = "${var.environment}"
+    EnvironmentGroup = "${var.environment_group}"
+  }
 }
 
 resource "aws_subnet" "private_subnet" {
