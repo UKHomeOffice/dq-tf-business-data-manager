@@ -83,6 +83,10 @@ variable ssh_protocol {
   description = "Protocol for SSH traffic"
 }
 
+variable "az" {
+  description = "Availability zone no1 for RDS implementation"
+}
+
 variable "az2" {
   default     = "eu-west-2b"
   description = "Availability zone no2 for RDS implementation"

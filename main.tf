@@ -13,8 +13,9 @@ module "instance" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id     = "${var.apps_vpc_id}"
-  cidr_block = "${var.dq_BDM_subnet_cidr}"
+  vpc_id            = "${var.apps_vpc_id}"
+  cidr_block        = "${var.dq_BDM_subnet_cidr}"
+  availability_zone = "${var.az}"
 
   tags {
     Name             = "sn-dq-bdm-private-${var.service}-${var.environment}-{az}"
