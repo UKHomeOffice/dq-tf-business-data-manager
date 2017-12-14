@@ -3,6 +3,7 @@ module "instance" {
   subnet_id       = "${aws_subnet.private_subnet.id}"
   user_data       = "LISTEN_HTTP=0.0.0.0:443 CHECK_RDS=${aws_db_instance.bdm_RDS_server.address}:5432"
   security_groups = ["${aws_security_group.bdm_web.id}"]
+  private_ip      = "${var.dq_BDM_instance_ip}"
 
   tags = {
     Name             = "instance-bdm-{1}-${var.service}-${var.environment}"
