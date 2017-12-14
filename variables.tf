@@ -23,6 +23,11 @@ variable "dq_BDM_subnet_cidr" {
   description = "DQ BDM subnet CIDR as per IP Addresses and CIDR blocks document"
 }
 
+variable "dq_BDM_instance_ip" {
+  description = "Mock IP address of EC2 instance"
+  default     = "10.1.10.11"
+}
+
 variable "https_from_port" {
   default     = 443
   description = "From port for HTTPS traffic"
@@ -58,27 +63,27 @@ variable "dq_apps_cidr" {
   description = "DQ Apps CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable dq_data_pipeline_cidr {
+variable "dq_data_pipeline_cidr" {
   default     = "10.1.8.0/24"
   description = "DQ Data Pipeline CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable dq_opps_subnet_1_cidr {
+variable "dq_opps_subnet_1_cidr" {
   default     = "10.2.0.0/24"
   description = "DQ Ops Subnet 1 CIDR as per IP Addresses and CIDR blocks document"
 }
 
-variable ssh_from_port {
+variable "ssh_from_port" {
   default     = 22
   description = "From port for SSH traffic"
 }
 
-variable ssh_to_port {
+variable "ssh_to_port" {
   default     = 22
   description = "To port for SSH traffic"
 }
 
-variable ssh_protocol {
+variable "ssh_protocol" {
   default     = "tcp"
   description = "Protocol for SSH traffic"
 }
