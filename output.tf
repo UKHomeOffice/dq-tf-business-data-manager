@@ -5,3 +5,7 @@ output "bdm_db_group_id" {
 output "bdm_server_id" {
   value = "${aws_db_instance.bdm_RDS_server.id}"
 }
+
+output "bdm_db_server_ip_address" {
+  value = "${aws_db_instance.bdm_RDS_server.address}"
+}
