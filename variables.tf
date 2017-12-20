@@ -63,6 +63,11 @@ variable "dq_apps_cidr" {
   description = "DQ Apps CIDR as per IP Addresses and CIDR blocks document"
 }
 
+variable "peering_cidr_block" {
+  default     = "10.3.0.0/16"
+  description = "DQ Peering CIDR as per IP Addresses and CIDR blocks document"
+}
+
 variable "dq_data_pipeline_cidr" {
   default     = "10.1.8.0/24"
   description = "DQ Data Pipeline CIDR as per IP Addresses and CIDR blocks document"

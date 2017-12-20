@@ -13,14 +13,16 @@ class TestE2E(unittest.TestCase):
               skip_credentials_validation = true
               skip_get_ec2_platforms = true
             }
-            
+
             module "root_modules" {
               source = "./mymodule"
               providers = {aws = "aws"}
               az = "eu-west-2"
-              
-            } 
-            
+
+              peering_cidr_block = "1.1.1.0/24"
+
+            }
+
         """
         self.result = Runner(self.snippet).result
 
