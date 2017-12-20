@@ -64,17 +64,26 @@ resource "aws_security_group" "bdm_web" {
   vpc_id = "${var.apps_vpc_id}"
 
   ingress {
-    from_port   = "${var.https_from_port}"
-    to_port     = "${var.https_to_port}"
-    protocol    = "${var.https_protocol}"
-    cidr_blocks = ["${var.dq_data_pipeline_cidr}", "${var.dq_opps_subnet_1_cidr}"]
+    from_port = "${var.https_from_port}"
+    to_port   = "${var.https_to_port}"
+    protocol  = "${var.https_protocol}"
+
+    cidr_blocks = [
+      "${var.dq_data_pipeline_cidr}",
+      "${var.dq_opps_subnet_1_cidr}",
+      "${var.peering_cidr_block}",
+    ]
   }
 
   ingress {
-    from_port   = "${var.ssh_from_port}"
-    to_port     = "${var.ssh_to_port}"
-    protocol    = "${var.ssh_protocol}"
-    cidr_blocks = ["${var.dq_opps_subnet_1_cidr}"]
+    from_port = "${var.ssh_from_port}"
+    to_port   = "${var.ssh_to_port}"
+    protocol  = "${var.ssh_protocol}"
+
+    cidr_blocks = [
+      "${var.dq_opps_subnet_1_cidr}",
+      "${var.peering_cidr_block}",
+    ]
   }
 
   egress {
@@ -96,10 +105,15 @@ resource "aws_security_group" "bdm_RDS" {
   vpc_id = "${var.apps_vpc_id}"
 
   ingress {
-    from_port   = "${var.RDS_from_port}"
-    to_port     = "${var.RDS_to_port}"
-    protocol    = "${var.RDS_protocol}"
-    cidr_blocks = ["${var.dq_opps_subnet_1_cidr}", "${var.dq_BDM_subnet_cidr}"]
+    from_port = "${var.RDS_from_port}"
+    to_port   = "${var.RDS_to_port}"
+    protocol  = "${var.RDS_protocol}"
+
+    cidr_blocks = [
+      "${var.dq_opps_subnet_1_cidr}",
+      "${var.dq_BDM_subnet_cidr}",
+      "${var.peering_cidr_block}",
+    ]
   }
 
   egress {
