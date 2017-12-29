@@ -9,7 +9,7 @@ This Terraform module has one private subnet and deploys an EC2 instance represe
 | ------------- |:-------------:| -----:| -----:|-----:| -----:|
 |INBOUND | SSH | TCP |22 | 22| TLS to BDM ELB |
 |INBOUND | HTTPS | TCP | 443 | 443 | TLS to BDM ELB |
-|INBOUND | Custom TCP | TCP | 5432 | 5432 | TLS to BDM Postgres ELB |
+|INBOUND | PostgreSQL | TCP | 5432 | 5432 | TLS to BDM Postgres ELB |
 
 ## Content overview
 
