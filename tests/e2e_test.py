@@ -18,6 +18,7 @@ class TestE2E(unittest.TestCase):
               source = "./mymodule"
               providers = {aws = "aws"}
               az = "eu-west-2"
+              naming_suffix = "apps-preprod-dq"
 
               peering_cidr_block = "1.1.1.0/24"
 
