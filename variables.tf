@@ -3,21 +3,6 @@ variable "naming_suffix" {
   description = "Naming suffix for tags, value passed from dq-tf-apps"
 }
 
-variable "service" {
-  default     = "dq-bdm"
-  description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
-}
-
-variable "environment" {
-  default     = "preprod"
-  description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
-}
-
-variable "environment_group" {
-  default     = "dq-apps"
-  description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
-}
-
 variable "apps_vpc_id" {
   default     = false
   description = "Value obtained from Apps module"
