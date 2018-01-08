@@ -31,28 +31,26 @@ class TestE2E(unittest.TestCase):
     def test_instance_user_data(self):
         self.assertEqual(self.result["root_modules"]["aws_instance.ConnectivityTester"]["user_data"], "956c7ed7bc9f169b3d71473c17fdbd3e7da55db5")
 
-    @unittest.skip
-    def test_instance_tags_name(self):
-        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Name"], "instance-bdm-{1}-dq-bdm-preprod")
+    def test_private_subnet_tags(self):
+        self.assertEqual(self.result["root_modules"]["aws_subnet.private_subnet"]["tags.Name"], "private-subnet-bdm-apps-preprod-dq")
 
-    @unittest.skip
-    def test_instance_tags_service(self):
-        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Service"], "dq-bdm")
+    def test_private_subnet_2_tags(self):
+        self.assertEqual(self.result["root_modules"]["aws_subnet.private_az2_subnet"]["tags.Name"], "private-subnet2-bdm-apps-preprod-dq")
 
-    @unittest.skip
-    def test_instance_tags_environment(self):
-        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.Environment"], "preprod")
+    def test_subnet_group_tags(self):
+        self.assertEqual(self.result["root_modules"]["aws_db_subnet_group.bdm_db_group"]["tags.Name"], "subnet-group-bdm-apps-preprod-dq")
 
-    @unittest.skip
-    def test_instance_tags_envgroup(self):
-        self.assertEqual(self.result["root_modules"]["aws_instance.instance"]["tags.EnvironmentGroup"], "dq-apps")
+    def test_security_group_web_tags(self):
+        self.assertEqual(self.result["root_modules"]["aws_security_group.bdm_web"]["tags.Name"], "sg-web-bdm-apps-preprod-dq")
 
-    @unittest.skip
-    def test_subnet_vpc(self):
-        self.assertEqual(self.result["root_modules"]["aws_subnet.subnet"]["vpc_id"], "module.apps.appsvpc_id")
+    def test_security_group_rds_tags(self):
+        self.assertEqual(self.result["root_modules"]["aws_security_group.bdm_RDS"]["tags.Name"], "sg-RDS-bdm-apps-preprod-dq")
 
     def test_subnet_cidr(self):
         self.assertEqual(self.result["root_modules"]["aws_subnet.private_subnet"]["cidr_block"], "10.1.10.0/24")
+
+    def test_db_instance_tags(self):
+        self.assertEqual(self.result["root_modules"]["aws_db_instance.bdm_RDS_server"]["tags.Name"], "db-RDS-bdm-apps-preprod-dq")
 
     @unittest.skip
     def test_web_security_group_ingress(self):
