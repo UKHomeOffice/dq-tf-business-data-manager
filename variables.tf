@@ -1,3 +1,8 @@
+variable "naming_suffix" {
+  default     = false
+  description = "Naming suffix for tags, value passed from dq-tf-apps"
+}
+
 variable "service" {
   default     = "dq-bdm"
   description = "As per naming standards in AWS-DQ-Network-Routing 0.4 document"
