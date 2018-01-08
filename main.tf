@@ -10,10 +10,7 @@ module "instance" {
   private_ip      = "${var.dq_BDM_instance_ip}"
 
   tags = {
-    Name             = "instance-bdm-{1}-${var.service}-${var.environment}"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "instance-${local.naming_suffix}"
   }
 }
 
@@ -23,10 +20,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone = "${var.az}"
 
   tags {
-    Name             = "sn-dq-bdm-private-${var.service}-${var.environment}-{az}"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "private-subnet-${local.naming_suffix}"
   }
 }
 
@@ -36,10 +30,7 @@ resource "aws_subnet" "private_az2_subnet" {
   availability_zone = "${var.az2}"
 
   tags {
-    Name             = "sn-dq-bdm-private-${var.service}-${var.environment}-az2"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "private-subnet2-${local.naming_suffix}"
   }
 }
 
@@ -57,10 +48,7 @@ resource "aws_db_subnet_group" "bdm_db_group" {
   ]
 
   tags {
-    Name             = "dq-bdm-postgresql-${var.service}-${var.environment}-subnet-group"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "subnet-group-${local.naming_suffix}"
   }
 }
 
@@ -98,10 +86,7 @@ resource "aws_security_group" "bdm_web" {
   }
 
   tags {
-    Name             = "sg-bdm-web-${var.service}-${var.environment}"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "sg-web-${local.naming_suffix}"
   }
 }
 
@@ -128,10 +113,7 @@ resource "aws_security_group" "bdm_RDS" {
   }
 
   tags {
-    Name             = "sg-bdm-web-${var.service}-${var.environment}"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "sg-RDS-${local.naming_suffix}"
   }
 }
 
@@ -159,9 +141,6 @@ resource "aws_db_instance" "bdm_RDS_server" {
   vpc_security_group_ids = ["${aws_security_group.bdm_RDS.id}"]
 
   tags {
-    Name             = "ec2-dq-bdm-postgresql-${var.service}-${var.environment}"
-    Service          = "${var.service}"
-    Environment      = "${var.environment}"
-    EnvironmentGroup = "${var.environment_group}"
+    Name = "db-RDS-${local.naming_suffix}"
   }
 }
